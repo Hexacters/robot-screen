@@ -1,6 +1,6 @@
 {
   "name": "active-screen",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Auto Mouse Move and tab switch",
   "main": "index.js",
   "keywords": [
@@ -17,12 +17,10 @@
   "bin": "./index.js",
   "author": "Venkata Narayanan V",
   "private": false,
-  "engines": {
-    "node": ">=6.0.0"
-  },
   "engineStrict": true,
   "license": "ISC",
   "dependencies": {
+    "moment": "^2.29.1",
     "robotjs": "^0.6.0"
   }
 }
