@@ -14,46 +14,63 @@ var textArray = [
     'Angular js issue in configuration',
 ];
 
-const duleFn = (start, end, t=1) => {
+const duleFn = (start, end, t = 1) => {
     robot.keyToggle(start, 'down');
-    for(var i=0; i<t; i++){
+    for (var i = 0; i < t; i++) {
         robot.keyTap(end);
     }
     robot.keyToggle(start, 'up')
 }
+let tempx = robot.getMousePos().x;
+let tempy = robot.getMousePos().y;
 
-var k=0;
-while (true) {
-    
-    var randomNumber = Math.floor(Math.random()*textArray.length);
+var k = 0;
+let inter;
 
-    // duleFn('control', 't');
+startListen();
+function startListen() {
+    inter = setInterval(e => {
+        let x = robot.getMousePos().x;
+        let y = robot.getMousePos().y;
 
-    // duleFn('control', 'f4');
-    
-    //robot.typeString(textArray[randomNumber]);
-
-    // Press enter.
-    //robot.keyTap("enter");
-   
-    for (var x = 0; x < width; x++) {
-        y = height * Math.sin((twoPI * x) / width) + height;
-        robot.moveMouse(x, y);
-    }
-
-    for (var x = width; x > 0; x--) {
-        y = height * Math.sin((twoPI * x) / width) + height;
-        robot.moveMouse(x, y);
-    }
-    k++;
-
-    duleFn('alt', 'tab', k);
-
-    if (k == 5) {
-        k=0;
-    }
-
-
-
-
+        if (tempx === x && tempy == y) {
+            start();
+        }
+        tempx = x;
+        tempy = y;
+    }, 1000 * 60)
 }
+
+
+function start() {
+    clearInterval(inter);
+    while (true) {
+        let xx = robot.getMousePos().x;
+        let yy = robot.getMousePos().y;
+        if (xx === 0 && yy === 0) {
+            startListen();
+            break;
+        }
+        var randomNumber = Math.floor(Math.random() * textArray.length);
+
+        for (var x = 0; x < width; x++) {
+            y = height * Math.sin((twoPI * x) / width) + height;
+            robot.moveMouse(x, y);
+        }
+
+        for (var x = width; x > 0; x--) {
+            y = height * Math.sin((twoPI * x) / width) + height;
+            robot.moveMouse(x, y);
+        }
+        k++;
+
+        duleFn('alt', 'tab', k);
+
+        if (k == 5) {
+            k = 0;
+        }
+
+    }
+}
+
+
