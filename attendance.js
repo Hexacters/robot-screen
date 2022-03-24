@@ -14,7 +14,7 @@ const duleFn = (start, end, t = 1) => {
 }
 
 const toggle = () => {
-    robot.moveMouseSmooth(393, 162);
+    robot.moveMouseSmooth(393, 192);
     duleFn('command', '3');
     duleFn('control', 't');
 
@@ -39,7 +39,6 @@ const start = async () => {
 
     if (isCheckIn) {
         toggle();
-        cp.fork(__dirname + '/index.js');
         return;
     }
 
