@@ -37,7 +37,6 @@ function startListen() {
         let y = robot.getMousePos().y;
 
         if (tempx === x && tempy == y) {
-            exec('pkill -CONT sfproc');
             start();
         }
         tempx = x;
@@ -62,10 +61,12 @@ function start() {
         let yy = robot.getMousePos().y;
 
         if (isOut()) {
+            exec('pkill -STOP sfproc');
             startListen();
             return;
         }
 
+        exec('pkill -CONT sfproc');
         if (xx === 1365 && yy === 0) {
             startListen();
             break;
