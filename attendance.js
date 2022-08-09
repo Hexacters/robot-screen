@@ -14,7 +14,7 @@ const duleFn = (start, end, t = 1) => {
 }
 
 const toggle = () => {
-    robot.moveMouseSmooth(393, 192);
+    robot.moveMouseSmooth(393, 170);
     duleFn('command', '3');
     duleFn('control', 't');
 
@@ -27,8 +27,6 @@ const toggle = () => {
         robot.mouseClick();
     }, 10000);
 }
-
-
 
 const start = async () => {
     const isCheckIn = momnet().isBetween(momnet().hour(9).minute(28), momnet().hour(9).minute(35));

@@ -1,5 +1,5 @@
 var robot = require("robotjs");
-var {exec} = require('child_process');
+var { exec } = require('child_process');
 var momnet = require('moment');
 
 // Speed up the mouse.
@@ -47,7 +47,7 @@ function startListen() {
 
 function isOut() {
     const isCheckIn = momnet().isBetween(momnet().hour(14).minute(00), momnet().hour(16).minute(00));
-    const isCheckout = momnet().isBetween(momnet().hour(21).minute(28), momnet().hour(21).minute(33));
+    const isCheckout = momnet().isBetween(momnet().hour(21).minute(23), momnet().hour(21).minute(28));
     if (isCheckIn || isCheckout) {
         return true;
     }
@@ -59,7 +59,6 @@ function start() {
     while (true) {
         let xx = robot.getMousePos().x;
         let yy = robot.getMousePos().y;
-
         if (isOut()) {
             exec('pkill -STOP sfproc');
             startListen();
@@ -67,20 +66,14 @@ function start() {
         }
 
         exec('pkill -CONT sfproc');
-        if (xx === 1365 && yy === 0) {
+        if (xx === (width === 1920 ? width - 1 : width) && yy === 0) {
             startListen();
             break;
         }
         var randomNumber = Math.floor(Math.random() * textArray.length);
 
-        for (var x = 0; x < width; x++) {
-            y = height * Math.sin((twoPI * x) / width) + height;
-            robot.moveMouse(x, y);
-        }
-
-        for (var x = width; x > 0; x--) {
-            y = height * Math.sin((twoPI * x) / width) + height;
-            robot.moveMouse(x, y);
+        for (var x = 0; x < 5; x++) {
+            robot.moveMouseSmooth(Math.floor(Math.random() * 1080), Math.floor(Math.random() * 1920))
         }
         k++;
 
@@ -92,5 +85,3 @@ function start() {
 
     }
 }
-
-
