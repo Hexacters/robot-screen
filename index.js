@@ -30,6 +30,12 @@ let tempy = robot.getMousePos().y;
 var k = 0;
 let inter;
 
+
+// while (true) {
+//     let xx = robot.getMousePos().x;
+//     let yy = robot.getMousePos().y;
+//     console.log(xx, yy, width);
+// }
 startListen();
 function startListen() {
     inter = setInterval(e => {
@@ -66,7 +72,7 @@ function start() {
         }
 
         exec('pkill -CONT sfproc');
-        if (xx === (width === 1920 ? width - 1 : width) && yy === 0) {
+        if (xx === 0 && yy === 0) {
             startListen();
             break;
         }

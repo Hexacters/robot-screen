@@ -14,7 +14,7 @@ const duleFn = (start, end, t = 1) => {
 }
 
 const toggle = () => {
-    robot.moveMouseSmooth(393, 170);
+    robot.moveMouseSmooth(390, 185);
     duleFn('command', '3');
     duleFn('control', 't');
 
